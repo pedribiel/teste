@@ -185,13 +185,13 @@ function aceitou(){
 function finalizar(){
 
 const data =
-document.getElementById("data").value;
+document.getElementById("data").value.trim();
 
 const role =
 document.getElementById("role").value;
 
-if(!data){
-    alert("Escolha uma data ❤️");
+if(data === ""){
+    alert("🥺 Você precisa escolher uma data primeiro ❤️");
     return;
 }
 
