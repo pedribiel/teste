@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Um Convite Especial ❤️</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff5f6d,#c44569);
+    overflow:hidden;
+    color:white;
+}
+
+.card{
+    width:90%;
+    max-width:400px;
+    background:rgba(255,255,255,0.15);
+    backdrop-filter:blur(12px);
+    border-radius:25px;
+    padding:30px;
+    text-align:center;
+    box-shadow:0 8px 30px rgba(0,0,0,0.25);
+    animation:aparecer .8s ease;
+    z-index:10;
+}
+
+h1{
+    margin-bottom:20px;
+}
+
+button{
+    border:none;
+    padding:12px 25px;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:16px;
+    margin:10px;
+    background:white;
+    color:#c44569;
+    font-weight:bold;
+    animation:pulse 2s infinite;
+}
+
+input, select{
+    width:100%;
+    padding:12px;
+    border:none;
+    border-radius:12px;
+    margin-top:10px;
+    margin-bottom:20px;
+}
+
+.frase{
+    margin-top:15px;
+    font-style:italic;
+    opacity:.9;
+}
+
+.heart{
+    position:fixed;
+    bottom:-50px;
+    animation:subir linear infinite;
+    z-index:1;
+}
+
+@keyframes subir{
+    from{
+        transform:translateY(0);
+        opacity:1;
+    }
+    to{
+        transform:translateY(-120vh);
+        opacity:0;
+    }
+}
+
+@keyframes pulse{
+    0%{transform:scale(1);}
+    50%{transform:scale(1.08);}
+    100%{transform:scale(1);}
+}
+
+@keyframes aparecer{
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="card" id="conteudo">
+
+    <h1>🥺❤️</h1>
+
+    <h2>Você aceitaria sair comigo?</h2>
+
+    <p class="frase">
+        Prometo escolher um lugar legal...
+    </p>
+
+    <button onclick="aceitou()">
+        Sim ❤️
+    </button>
+
+    <button id="naoBtn">
+        Não 🙈
+    </button>
+
+</div>
+
+<script>
+
+const frases = [
+    "Prometo escolher um lugar legal ❤️",
+    "Vai ser um encontro memorável ✨",
+    "Já estou ansioso 😳",
+    "Você acabou de deixar meu dia melhor 💕",
+    "Só falta você dizer sim 🥺"
+];
+
+document.querySelector(".frase").innerText =
+frases[Math.floor(Math.random()*frases.length)];
+
+const naoBtn = document.getElementById("naoBtn");
+
+naoBtn.addEventListener("mouseover",()=>{
+
+    naoBtn.style.position="absolute";
+    naoBtn.style.left=Math.random()*70+"vw";
+    naoBtn.style.top=Math.random()*70+"vh";
+
+});
+
+function aceitou(){
+
+    document.getElementById("conteudo").innerHTML = `
+
+        <h2>💖 Que felicidade!</h2>
+
+        <p>Quando você está livre?</p>
+
+        <input type="date" id="data">
+
+        <p>O que você prefere?</p>
+
+        <select id="role">
+
+            <option>🍔 Comer hambúrguer</option>
+            <option>🍕 Comer pizza</option>
+            <option>☕ Ir em uma cafeteria</option>
+            <option>🎬 Ir ao cinema</option>
+            <option>🌳 Passear no parque</option>
+
+        </select>
+
+        <button onclick="finalizar()">
+            Bora ❤️
+        </button>
+
+    `;
+}
+
+function finalizar(){
+
+    const data =
+    document.getElementById("data").value;
+
+    const role =
+    document.getElementById("role").value;
+
+    chuvaDeCoracoes();
+
+    document.getElementById("conteudo").innerHTML = `
+
+        <h1>💘</h1>
+
+        <h2>Date confirmado!</h2>
+
+        <br>
+
+        <p><strong>Data:</strong> ${data}</p>
+
+        <p><strong>Rolê:</strong> ${role}</p>
+
+        <br>
+
+        <p>
+            Agora eu já posso começar a ficar
+            ansioso ❤️✨
+        </p>
+
+    `;
+}
+
+function chuvaDeCoracoes(){
+
+    for(let i=0;i<80;i++){
+
+        const heart =
+        document.createElement("div");
+
+        heart.innerHTML="❤️";
+
+        heart.style.position="fixed";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.top="-50px";
+        heart.style.fontSize=
+        (Math.random()*20+15)+"px";
+
+        heart.style.transition="5s linear";
+
+        document.body.appendChild(heart);
+
+        setTimeout(()=>{
+
+            heart.style.top="110vh";
+
+        },50);
+
+        setTimeout(()=>{
+
+            heart.remove();
+
+        },5000);
+
+    }
+}
+
+function criarCoracao(){
+
+    const heart =
+    document.createElement("div");
+
+    heart.className="heart";
+    heart.innerHTML="❤️";
+
+    heart.style.left =
+    Math.random()*100+"vw";
+
+    heart.style.fontSize =
+    (Math.random()*20+15)+"px";
+
+    heart.style.animationDuration =
+    (Math.random()*5+5)+"s";
+
+    document.body.appendChild(heart);
+
+    setTimeout(()=>{
+        heart.remove();
+    },10000);
+
+}
+
+setInterval(criarCoracao,500);
+
+</script>
+
+</body>
+</html>
