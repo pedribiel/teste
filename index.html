@@ -184,11 +184,31 @@ function aceitou(){
 
 function finalizar(){
 
-    const data =
-    document.getElementById("data").value;
+const data =
+document.getElementById("data").value;
 
-    const role =
-    document.getElementById("role").value;
+const role =
+document.getElementById("role").value;
+
+if(!data){
+    alert("Escolha uma data ❤️");
+    return;
+}
+
+fetch("https://formspree.io/f/mwvjwgnj", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+    },
+    body: JSON.stringify({
+        data_escolhida: data,
+        role_escolhido: role,
+        resposta: "Aceitou o convite ❤️",
+        enviado_em: new Date().toLocaleString("pt-BR")
+    })
+})
+.then(() => {
 
     chuvaDeCoracoes();
 
@@ -196,22 +216,47 @@ function finalizar(){
 
         <h1>💘</h1>
 
-        <h2>Date confirmado!</h2>
-
-        <br>
-
-        <p><strong>Data:</strong> ${data}</p>
-
-        <p><strong>Rolê:</strong> ${role}</p>
+        <h2>Perfeito!</h2>
 
         <br>
 
         <p>
-            Agora eu já posso começar a ficar
-            ansioso ❤️✨
+            Fico muito feliz que você aceitou ❤️
+        </p>
+
+        <br>
+
+        <p>
+            📅 <strong>${data}</strong>
+        </p>
+
+        <p>
+            🎯 <strong>${role}</strong>
+        </p>
+
+        <br>
+
+        <p style="font-size:18px;">
+            Agora me chama no WhatsApp e me conta sua escolha 😳💕
+        </p>
+
+        <br>
+
+        <p style="opacity:.8;">
+            Estou ansioso pelo nosso date ✨
         </p>
 
     `;
+
+})
+.catch(() => {
+
+    alert(
+        "Ops! Não consegui enviar sua resposta ❤️"
+    );
+
+});
+
 }
 
 function chuvaDeCoracoes(){
